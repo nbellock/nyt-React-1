@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route} from "react-router-dom";
-
+import {NavLink} from "react-router-dom";
+import './Nav.css';
 
 class Nav extends Component {
 
@@ -16,10 +16,10 @@ class Nav extends Component {
       <div>
         <nav>
           <div className="nav-wrapper">
-            <a href="#" className="brand-logo center">New York Times Article Search</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li><a href="./home" style={{"text-decoration": "none"}}>Home</a></li>
-              <li><a href="./saved" tyle={{"text-decoration": "none"}}>Saved</a></li>
+              <li><a href="#" className="brand-logo center customNav">New York Times Article Search</a></li>
+              <li><a onClick={()=>window.location.replace("/")} style={{"text-decoration": "none"}}>Home</a></li>
+              <li><NavLink to="/saved" style={{"text-decoration": "none"}}>Saved</NavLink></li>
             </ul>
           </div>
         </nav>

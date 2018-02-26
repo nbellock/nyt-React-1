@@ -8,26 +8,16 @@ export default class IndividualResult extends Component {
   constructor(){
     super();
     this.state={
-      saved: null
+      deleted: null
     }
-    this.save = this.save.bind(this);
+    this.delete = this.delete.bind(this);
   }; // End of ConstructorS
 
 
-  save(){
-
-    console.log("Saved Article Clicked")
-    let that = this;
-    API.saveArticle({
-      articleId : this.props.id,
-      url: this.props.url ,
-      title: this.props.title,
-      date : this.props.date,
-      image : this.props.image
-    }).then(that.setState({
-      saved: true
-    }));
-
+  delete(){
+    this.setState({deleted: true}, () => {
+      this.props.onDelete(this.props.articleId);
+    })
   }
 
   render() {
@@ -40,10 +30,10 @@ export default class IndividualResult extends Component {
         <strong> URL: </strong> <a href={this.props.url} target="_blank"> {this.props.url} </a>
         {this.props.date? (<strong><br/>{`Date: ${this.props.date}`}</strong>) : ""}
         <br/>
-        <strong> ID: </strong> {this.props.id}
+        <strong> ID: </strong> {this.props.articleId}
         <br/>
-        {this.state.saved? (<button style={{"margin-top" : "10px"}} id={this.props.id} className="btn btn-primary right-align"> Article Saved </button>):
-          (<button style={{"margin-top" : "10px"}} id={this.props.id} onClick={this.save} className="btn btn-success right-align"> Save </button>)
+        {this.state.deleted? (<button style={{"margin-top" : "10px"}} id={this.props.id} className="btn btn-primary right-align"> Article Deleted </button>):
+          (<button style={{"margin-top" : "10px"}} id={this.props.id} onClick={this.delete} className="btn btn-success right-align"> Delete </button>)
         }
 
       </li>
